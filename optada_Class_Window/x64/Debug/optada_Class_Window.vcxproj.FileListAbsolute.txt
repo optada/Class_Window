@@ -1,0 +1,2 @@
+D:\GIT\Class_Window\optada_Class_Window\x64\Debug\optada_Class_Window.exe
+D:\GIT\Class_Window\optada_Class_Window\x64\Debug\optada_Class_Window.pdb

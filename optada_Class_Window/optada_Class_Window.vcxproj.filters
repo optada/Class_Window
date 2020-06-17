@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Code">
+      <UniqueIdentifier>{be67f3b2-9d3b-48e5-9641-6a4b81da2729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Class_Window">
+      <UniqueIdentifier>{6c32cb40-f132-4b99-b22a-8243efbf9432}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Source.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Class_Window\OPTada_Window.h">
+      <Filter>Code\Class_Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Class_Window\OPTada_Window_Settings.h">
+      <Filter>Code\Class_Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
