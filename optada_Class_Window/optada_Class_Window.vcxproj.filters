@@ -12,6 +12,9 @@
     <ClCompile Include="Code\Source.cpp">
       <Filter>Code</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Class_Window\OPTada_Window.cpp">
+      <Filter>Code\Class_Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Class_Window\OPTada_Window.h">

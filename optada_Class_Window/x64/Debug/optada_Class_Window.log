@@ -1,3 +1,6 @@
-﻿  Source.cpp
-D:\GIT\Class_Window\optada_Class_Window\Code\Source.cpp(13,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+﻿  OPTada_Window.cpp
+  Source.cpp
+D:\GIT\Class_Window\optada_Class_Window\Code\Source.cpp(25,40): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+D:\GIT\Class_Window\optada_Class_Window\Code\Source.cpp(58,38): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+  Generating Code...
   optada_Class_Window.vcxproj -> D:\GIT\Class_Window\optada_Class_Window\x64\Debug\optada_Class_Window.exe
