@@ -19,10 +19,10 @@ enum OPTadaE_WindowState_ForClassWindow
 
 
 // Structure of size (Width - X  | Height - Y)
-struct OPTadaS_WindowSize
+struct OPTadaS_Window_Size
 {
-	int Width  = 0; // X
-	int Height = 0; // Y
+	int width  = 0; // X
+	int height = 0; // Y
 };
 
 
@@ -31,50 +31,69 @@ class OPTada_Window
 {
 private:
 
-	OPTadaE_WindowState_ForClassWindow WindowState = OPTadaE_WindowState_ForClassWindow::NONE; // Current state of window 
+	OPTadaE_WindowState_ForClassWindow windowState = OPTadaE_WindowState_ForClassWindow::NONE; // Current state of window 
 
-	OPTadaS_WindowSize WindowSize;    // Size of window (with borders)
-	OPTadaS_WindowSize WorkplaceSize; // Size of workplace
+	WINDOWPLACEMENT windowPlacement_FullScreen = { 0 }; // information about the position of the window in full screen mode
+	WINDOWPLACEMENT windowPlacement_Windowed   = { 0 }; // information about the position of the window in window mode
 
-	HWND      main_window_handle;    // window handle (links to access the window)
-	HINSTANCE main_window_hinstance; // индикатор оконной процедуры  
+	OPTadaS_Window_Size windowSize;    // Size of window (with borders)
+	OPTadaS_Window_Size workplaceSize; // Size of workplace
+
+	HWND      main_window_handle    = nullptr; // window handle (links to access the window)
+	HINSTANCE main_window_hinstance = nullptr; // индикатор оконной процедуры  
+
+	// set new parameters of window (for changing size) | widnowSize and workplaceSize
+	// [in] OPTadaS_Window_Size& new_WorkplaceSize_ // new workplace size
+	void Update_WindowSizeWithBorders();
 
 public:
 
-	MSG       main_window_msg; // дескриптор сообщений окна (для обработки сообщений окна)
+	MSG main_window_msg; // window message descriptor (for processing window messages)
 
 
-	// метод создает стандартное окно
-	// [in] HINSTANCE hinstance_
+	// method initializes the class and creates a standard window
+	// [in] HINSTANCE hinstance_ // hinstance_ of process
 	bool InitAndCreateStandartWindow(HINSTANCE hinstance_);
 
-	// метод менеяет настройки отображения окна
-	// [in] OPTadaE_WindowState_ForClassWindow new_WindowState_
-	// [in] OPTadaS_WindowSize& new_WorkplaceSize_
-	//bool Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow new_WindowState_, OPTadaS_WindowSize& new_WorkplaceSize_);
+	// method changes window display settings and window size
+	// [in] OPTadaE_WindowState_ForClassWindow new_WindowState_ // set new window state --> if NONE - not changing | other - new state
+	// [in] OPTadaS_Window_Size& new_WorkplaceSize_             // set new workPlace size (you can use OPTada_Window->Get_WorkplaceSize() for not changing)
+	bool Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow new_WindowState_, OPTadaS_Window_Size& new_WorkplaceSize_);
 
 
+	// getting the size of the current monitor
+	// [out] OPTadaS_Window_Size& monitorSize_ // size of monitor
+	void Get_MonitorSize(OPTadaS_Window_Size& monitorSize_);
 
-	// дописать изменение при графике!!! (все вроде работает....)
-	// Меняет полноэкранный на оконный и наоборот (разрешение не меняет) +
-	//void switchFullscreen();
 
-	// метод меняет настройки окна на полноэкранные (разрешение не меняет) +
-	//void setWindowFullscreen();
+	// get current window state
+	// [out] OPTadaE_WindowState_ForClassWindow& windowState_
+	inline void Get_WindowState(OPTadaE_WindowState_ForClassWindow& windowState_);
 
-	// метод меняет настройки окна на оконные (разрешение не меняет) +
-	//void setWindowBordered();
+	// get current window size
+	// [out] OPTadaS_Window_Size& windowSize_
+	void Get_WindowSize(OPTadaS_Window_Size& windowSize_);
 
-	// меняем разрешение монитора на разрешение окна +
-	//void setMonitorFullscreen();
+	// get current workplace size
+	// [out] OPTadaS_Window_Size& workplaceSize_
+	void Get_WorkplaceSize(OPTadaS_Window_Size& workplaceSize_);
 
-	// восстанавливам разрешение монитора +
-	//void setMonitorWindowed();
+	// get handle of main window
+	// return = main_window_handle
+	HWND Get_MainWindowHandle();
+	
+
+	// USE THIS if you loose focus on your window when mode is fullscreen mode
+	// [in] bool haveFocus_ // true - if you take focus again | false - if you loose focus
+	void Do_FockusInFullScreenMode(bool haveFocus_);
 };
 
 
 // Created class OPTada_Window for main window
 static OPTada_Window global_Window;
+
+
+// --------------------------------------------------------------------------------------------
 
 
 // обработка сообщений главного окна

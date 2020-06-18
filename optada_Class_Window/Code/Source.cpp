@@ -1,11 +1,12 @@
 // Created by OPTada // Free for use //
 // - - - - - - - - - - - - - - - - - //
 
-#include <windows.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include <windows.h>
 
 #include "Class_Window\OPTada_Window.h"
 
@@ -25,11 +26,30 @@ int WINAPI WinMain(
 		return (global_Window.main_window_msg.wParam); // если окно не создалось - закрытие
 	}
 
-	/*
-	if (!global_Window.Change(true, 1280, 720)) {
+	OPTadaS_Window_Size newWindowSize;
+	newWindowSize.width = 700;
+	newWindowSize.height = 700;
+	if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_WindowedWithNoBurders, newWindowSize)) {
 		MessageBox(NULL, L"main hange error", L"wind", NULL);
 	};
-	*/
+
+	newWindowSize.width = 800;
+	newWindowSize.height = 600;
+	if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen, newWindowSize)) {
+		MessageBox(NULL, L"main hange error", L"wind", NULL);
+	};
+
+	newWindowSize.width = 800;
+	newWindowSize.height = 600;
+	if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed, newWindowSize)) {
+		MessageBox(NULL, L"main hange error", L"wind", NULL);
+	};
+
+	//newWindowSize.width = 1280;
+	//newWindowSize.height = 720;
+	//if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed, newWindowSize)) {
+	//	MessageBox(NULL, L"main hange error", L"wind", NULL);
+	//};
 
 
 	float lastTime = (float)timeGetTime();
