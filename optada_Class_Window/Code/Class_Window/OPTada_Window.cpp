@@ -30,11 +30,11 @@ void OPTada_Window::Update_WindowSizeWithBorders()
 	// save global variables
 	if (windowState != OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
 		windowSize.width  = window_rect.right  - window_rect.left; // window X
-		windowSize.height = window_rect.bottom - window_rect.top;  // window Ó
+		windowSize.height = window_rect.bottom - window_rect.top;  // window y
 	}
 	else {
 		windowSize.width  = workplaceSize.width;  // window X
-		windowSize.height = workplaceSize.height; // window Ó
+		windowSize.height = workplaceSize.height; // window y
 	}
 
 	ShowWindow(main_window_handle, SW_SHOW); // function shows a window (if it has not been shown before or updates it)

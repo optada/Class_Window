@@ -24,7 +24,7 @@ struct OPTadaS_Window_Size
 };
 
 
-// Класс главного окна
+// The class that creates and controls the window
 class OPTada_Window
 {
 private:
