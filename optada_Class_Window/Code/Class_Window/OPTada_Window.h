@@ -46,10 +46,14 @@ private:
 	// [in] OPTadaS_Window_Size& new_WorkplaceSize_ // new workplace size
 	void Update_WindowSizeWithBorders();
 
+	int test1 = 0;
+
 public:
 
 	MSG main_window_msg; // window message descriptor (for processing window messages)
 
+
+	void Test1() { test1 = 3; }
 
 	// method initializes the class and creates a standard window
 	// [in] HINSTANCE hinstance_ // hinstance_ of process
@@ -89,12 +93,18 @@ public:
 };
 
 
-// Created class OPTada_Window for main window
-static OPTada_Window global_Window;
-
-
 // --------------------------------------------------------------------------------------------
 
 
 // обработка сообщений главного окна
 static LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
+
+
+// --------------------------------------------------------------------------------------------
+
+
+// Created class OPTada_Window for main window
+static OPTada_Window global_Window;
+
+
+// --------------------------------------------------------------------------------------------

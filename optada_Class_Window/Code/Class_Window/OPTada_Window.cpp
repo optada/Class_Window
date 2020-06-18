@@ -262,6 +262,7 @@ void OPTada_Window::Do_FockusInFullScreenMode(bool haveFocus_)
 // --------------------------------------------------------------------------------------------
 
 
+
 LRESULT CALLBACK WindowProc(HWND hwnd,
 	UINT msg,
 	WPARAM wparam,
@@ -281,23 +282,27 @@ LRESULT CALLBACK WindowProc(HWND hwnd,
 		case 0x46: { // pressed 'F' button
 
 			// change window mode
-			OPTadaE_WindowState_ForClassWindow windowState;
-			OPTadaS_Window_Size workPlaceSize;
-			(&global_Window)->Get_WindowState(windowState);
-			global_Window.Get_WorkplaceSize(workPlaceSize);
+			OPTadaE_WindowState_ForClassWindow WindowProc_windowState;
+			OPTadaS_Window_Size WindowProc_workPlaceSize;
+			//(&global_Window)->Get_WindowState(WindowProc_windowState);
+			//global_Window.Get_WorkplaceSize(WindowProc_workPlaceSize);
+			WindowProc_windowState = OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed;
+			WindowProc_workPlaceSize.width = 1280;
+			WindowProc_workPlaceSize.height = 720;
 
-			if (windowState == OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
+			if (WindowProc_windowState == OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
 
-				if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed, workPlaceSize)) {
+				if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed, WindowProc_workPlaceSize)) {
 					MessageBox(NULL, L"Swich mode to window error", L"wind", NULL);
 				};
 			}
 			else {
 
-				if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen, workPlaceSize)) {
+				if (!global_Window.Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen, WindowProc_workPlaceSize)) {
 					MessageBox(NULL, L"Swich mode to fullscreen error", L"wind", NULL);
 				};
 			}
+			
 		} break;
 
 		default: break;
