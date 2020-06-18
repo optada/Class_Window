@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <windows.h>
-
 #include "OPTada_Window_Settings.h"
 
 
@@ -46,14 +44,10 @@ private:
 	// [in] OPTadaS_Window_Size& new_WorkplaceSize_ // new workplace size
 	void Update_WindowSizeWithBorders();
 
-	int test1 = 0;
-
 public:
 
 	MSG main_window_msg; // window message descriptor (for processing window messages)
 
-
-	void Test1() { test1 = 3; }
 
 	// method initializes the class and creates a standard window
 	// [in] HINSTANCE hinstance_ // hinstance_ of process
@@ -87,24 +81,27 @@ public:
 	HWND Get_MainWindowHandle();
 	
 
-	// USE THIS if you loose focus on your window when mode is fullscreen mode
+	// USE THIS if you loose focus, when your window mode is fullscreen mode
 	// [in] bool haveFocus_ // true - if you take focus again | false - if you loose focus
-	void Do_FockusInFullScreenMode(bool haveFocus_);
+	void Do_FocusInFullScreenMode(bool haveFocus_);
 };
 
 
 // --------------------------------------------------------------------------------------------
 
 
-// обработка сообщений главного окна
-static LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
-
-
-// --------------------------------------------------------------------------------------------
-
-
 // Created class OPTada_Window for main window
-static OPTada_Window global_Window;
+extern OPTada_Window global_Window;
 
 
 // --------------------------------------------------------------------------------------------
+
+
+// process messages of the main window
+static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+
+
+// --------------------------------------------------------------------------------------------
+
+
+////////// low-level keyboard processing is described in OPTada_Window.cpp ///////////

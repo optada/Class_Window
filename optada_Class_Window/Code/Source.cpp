@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include <windows.h>
-
 #include "Class_Window\OPTada_Window.h"
 
 using namespace std;
