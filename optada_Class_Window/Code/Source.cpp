@@ -12,16 +12,16 @@ using namespace std;
 
 
 int WINAPI WinMain(
-	HINSTANCE hinstance,     // дескриптор экземпл€ра приложени€ -- работает как идентификатор оконной процедуры
-	HINSTANCE hprevinstance, // в WIN32 не используетс€
-	LPSTR lpcmdline,         // нужен дл€ запуска окна в режиме командной строки
-	int ncmdshow             // режим отображени€ окна (понадобитс€ дл€ дальнейшей фун-ции WindowShow())
+	HINSTANCE hinstance,     // application instance descriptor - acts as an identifier for a window procedure
+	HINSTANCE hprevinstance, // in WIN32 is not used
+	LPSTR lpcmdline,         // needed to run the window in command line mode
+	int ncmdshow             // window display mode (needed for further WindowShow () functions)
 	)
 {	
 
-	// создание стандартного окна
+	// create a standard window
 	if (!global_Window.InitAndCreateStandartWindow(hinstance)) { 
-		return (global_Window.main_window_msg.wParam); // если окно не создалось - закрытие
+		return (global_Window.main_window_msg.wParam); // if the window did not create, close
 	}
 
 	OPTadaS_Window_Size newWindowSize;

@@ -38,7 +38,7 @@ private:
 	OPTadaS_Window_Size workplaceSize; // Size of workplace
 
 	HWND      main_window_handle    = nullptr; // window handle (links to access the window)
-	HINSTANCE main_window_hinstance = nullptr; // индикатор оконной процедуры  
+	HINSTANCE main_window_hinstance = nullptr; // window procedure indicator
 
 	// set new parameters of window (for changing size) | widnowSize and workplaceSize
 	// [in] OPTadaS_Window_Size& new_WorkplaceSize_ // new workplace size

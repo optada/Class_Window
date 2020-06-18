@@ -37,7 +37,7 @@ void OPTada_Window::Update_WindowSizeWithBorders()
 		windowSize.height = workplaceSize.height; // window ”
 	}
 
-	ShowWindow(main_window_handle, SW_SHOW); // функци€ показывает окно (если оно не было показано ранее или обновл€ет его)
+	ShowWindow(main_window_handle, SW_SHOW); // function shows a window (if it has not been shown before or updates it)
 	UpdateWindow(main_window_handle);
 }
 
@@ -402,8 +402,8 @@ LRESULT CALLBACK KeyboardProcLowLevel(int nCode, WPARAM wParam, LPARAM lParam)
 				
 				//if (!Screen_Windowed)
 				//{
-				//	// при полноэкранном режиме и активации alt+tab окно сворачиваетс€, при ативации - возвращаетс€
-				//	if (/*!IsIconic(main_window_handle) */true) // доработать alt+tab (доработать пуск+tab)
+				//	// when full-screen mode and alt + tab activation, the window is minimized, when activated, it returns
+				//	if (/*!IsIconic(main_window_handle) */true) // modify alt + tab (modify launch + tab)
 				//	{
 				//		Main_Window.setMonitorWindowed();
 				//		ShowWindow(main_window_handle, SW_SHOWMINNOACTIVE);
@@ -461,14 +461,14 @@ int UnHookKeyboardProc()
 			// Successfully Un Hooked keyboard routine.
 		}
 		else {
-			//Error Keyboard Not successfully Un hooked!
+			// Error Keyboard Not successfully Un hooked!
 			// UnhookWindowsHookEx() returned failure!
 		}
 
 		return retcode;
 	}
 	else {
-		//Error Keyboard Not successfully hooked!
+		// Error Keyboard Not successfully hooked!
 		// Could not unhook procedure!
 		return true;
 	}
