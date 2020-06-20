@@ -40,6 +40,7 @@ private:
 	HWND      main_window_handle    = nullptr; // window handle (links to access the window)
 	HINSTANCE main_window_hinstance = nullptr; // window procedure indicator
 
+
 	// set new parameters of window (for changing size) | widnowSize and workplaceSize
 	// [in] OPTadaS_Window_Size& new_WorkplaceSize_ // new workplace size
 	void Update_WindowSizeWithBorders();
@@ -79,11 +80,16 @@ public:
 	// get handle of main window
 	// return = main_window_handle
 	HWND Get_MainWindowHandle();
-	
 
-	// USE THIS if you loose focus, when your window mode is fullscreen mode
-	// [in] bool haveFocus_ // true - if you take focus again | false - if you loose focus
-	void Do_FocusInFullScreenMode(bool haveFocus_);
+
+	// Use this when your window mode is full screen. And you loose focus
+	void Do_LooseFocusInFullscreenMode();
+
+	// Use this when your window mode is full screen. And you loose focus by ALT+TAB
+	void Do_AltTabLooseFocusInFullscreenMode();
+
+	// Use this when your window mode is full screen. And you take focus back
+	void Do_RestoreFocusInFullscreenMode();
 };
 
 

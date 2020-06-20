@@ -232,37 +232,50 @@ HWND OPTada_Window::Get_MainWindowHandle()
 }
 
 
-void OPTada_Window::Do_FocusInFullScreenMode(bool haveFocus_)
+void OPTada_Window::Do_LooseFocusInFullscreenMode()
 {
 	if (windowState != OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
 		return;
 	}
 
-	if (haveFocus_) { // got focus
+	// set monitor - windowed
+	ChangeDisplaySettings(NULL, 0);
 
-		DEVMODE devMode = { 0 };
-
-		// OPTadaS_Window_Size monitorSize;
-		// Get_MonitorSize(monitorSize);
-		devMode.dmSize = sizeof(DEVMODE);
-		devMode.dmPelsWidth  = workplaceSize.width;  // set max size of workplace // monitorSize.width;  - you can chage it on set max size of monitor
-		devMode.dmPelsHeight = workplaceSize.height; // set max size of workplace // monitorSize.height; - you can chage it on set max size of monitor
-		devMode.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT;
-
-		// set monitor - fullScreen mode
-		ChangeDisplaySettings(&devMode/*0*/, CDS_FULLSCREEN);
-
-		SetWindowPlacement(main_window_handle, &windowPlacement_FullScreen);
-	}
-	else { // loose focus
-
-		// set monitor - windowed
-		ChangeDisplaySettings(NULL, 0);
-
-		ShowWindow(main_window_handle, SW_SHOWMINNOACTIVE); // SW_MINIMIZE
-	}
+	ShowWindow(main_window_handle, SW_SHOWMINNOACTIVE); // you can use SW_MINIMIZE
 }
 
+void OPTada_Window::Do_AltTabLooseFocusInFullscreenMode()
+{
+	if (windowState != OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
+		return;
+	}
+
+	// set monitor - windowed
+	ChangeDisplaySettings(NULL, 0);
+
+	ShowWindow(main_window_handle, SW_SHOWMINNOACTIVE);
+}
+
+void OPTada_Window::Do_RestoreFocusInFullscreenMode()
+{
+	if (windowState != OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
+		return;
+	}
+
+	DEVMODE devMode = { 0 };
+
+	// OPTadaS_Window_Size monitorSize;
+	// Get_MonitorSize(monitorSize);
+	devMode.dmSize = sizeof(DEVMODE);
+	devMode.dmPelsWidth = workplaceSize.width;  // set max size of workplace // monitorSize.width;  - you can chage it on set max size of monitor
+	devMode.dmPelsHeight = workplaceSize.height; // set max size of workplace // monitorSize.height; - you can chage it on set max size of monitor
+	devMode.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT;
+
+	// set monitor - fullScreen mode
+	ChangeDisplaySettings(&devMode/*0*/, CDS_FULLSCREEN);
+
+	SetWindowPlacement(main_window_handle, &windowPlacement_FullScreen);
+}
 
 // --------------------------------------------------------------------------------------------
 
@@ -327,14 +340,14 @@ static LRESULT CALLBACK WindowProc(
 		if (windowState == OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen
 			&& IsIconic(hwnd) && WA_ACTIVE == LOWORD(wparam)) {
 
-			global_Window.Do_FocusInFullScreenMode(true);
+			global_Window.Do_RestoreFocusInFullscreenMode();
 		}
 		else {
 			// if fullscreen and loss of focus occurs
 			if (windowState == OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen 
 				&& WA_INACTIVE == LOWORD(wparam)) {
 
-				global_Window.Do_FocusInFullScreenMode(false);
+				global_Window.Do_LooseFocusInFullscreenMode();
 			}
 		}
 
@@ -396,7 +409,7 @@ LRESULT CALLBACK KeyboardProcLowLevel(int nCode, WPARAM wParam, LPARAM lParam)
 				// if fullscreen and focus occurs
 				if (windowState == OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_FullScreen) {
 
-					global_Window.Do_FocusInFullScreenMode(false);
+					global_Window.Do_AltTabLooseFocusInFullscreenMode();
 				}
 
 				
