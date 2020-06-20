@@ -31,13 +31,15 @@ private:
 
 	OPTadaE_WindowState_ForClassWindow windowState = OPTadaE_WindowState_ForClassWindow::NONE; // Current state of window 
 
+	OPTadaE_WindowState_ForClassWindow lastWindowedMode = OPTadaE_WindowState_ForClassWindow::ENUM_WindowState_Windowed; // last windowed mode
+
 	WINDOWPLACEMENT windowPlacement_FullScreen = { 0 }; // information about the position of the window in full screen mode
-	WINDOWPLACEMENT windowPlacement_Windowed   = { 0 }; // information about the position of the window in window mode
+	WINDOWPLACEMENT windowPlacement_Windowed = { 0 }; // information about the position of the window in window mode
 
 	OPTadaS_Window_Size windowSize;    // Size of window (with borders)
 	OPTadaS_Window_Size workplaceSize; // Size of workplace
 
-	HWND      main_window_handle    = nullptr; // window handle (links to access the window)
+	HWND      main_window_handle = nullptr; // window handle (links to access the window)
 	HINSTANCE main_window_hinstance = nullptr; // window procedure indicator
 
 
@@ -51,12 +53,15 @@ public:
 
 
 	// method initializes the class and creates a standard window
-	// [in] HINSTANCE hinstance_ // hinstance_ of process
-	bool InitAndCreateStandartWindow(HINSTANCE hinstance_);
+	// [in] HINSTANCE hinstance_  // hinstance_ of process
+	// [in] WNDPROC& windowProc_ // event structure
+	// return = true - done | false - error
+	bool InitAndCreateStandartWindow(HINSTANCE hinstance_, WNDPROC windowProc_);
 
 	// method changes window display settings and window size
 	// [in] OPTadaE_WindowState_ForClassWindow new_WindowState_ // set new window state --> if NONE - not changing | other - new state
 	// [in] OPTadaS_Window_Size& new_WorkplaceSize_             // set new workPlace size (you can use OPTada_Window->Get_WorkplaceSize() for not changing)
+	// return = true - done | false - error
 	bool Change_DisplayOfWindow(OPTadaE_WindowState_ForClassWindow new_WindowState_, OPTadaS_Window_Size& new_WorkplaceSize_);
 
 
@@ -82,14 +87,21 @@ public:
 	HWND Get_MainWindowHandle();
 
 
+	// Use this when you need change (last type) window mode to fullscreen and back
+	// return = true - done | false - error
+	bool Do_SwapMode_Fullscreen_LastWindowed();
+
 	// Use this when your window mode is full screen. And you loose focus
-	void Do_LooseFocusInFullscreenMode();
+	// return = true - done | false - not fullscreen mode
+	bool Do_LooseFocusInFullscreenMode();
 
 	// Use this when your window mode is full screen. And you loose focus by ALT+TAB
-	void Do_AltTabLooseFocusInFullscreenMode();
+	// return = true - done | false - not fullscreen mode
+	bool Do_AltTabLooseFocusInFullscreenMode();
 
 	// Use this when your window mode is full screen. And you take focus back
-	void Do_RestoreFocusInFullscreenMode();
+	// return = true - done | false - not fullscreen mode
+	bool Do_RestoreFocusInFullscreenMode();
 };
 
 
@@ -102,9 +114,6 @@ extern OPTada_Window global_Window;
 
 // --------------------------------------------------------------------------------------------
 
-
-// process messages of the main window
-static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 
 // --------------------------------------------------------------------------------------------
